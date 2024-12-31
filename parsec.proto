@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package parsec;
+
+service Parsec {
+  rpc HowManyEarthWidthInParsec(Empty) returns (HowManyEarthWidthInParsecRes);
+}
+
+message HowManyEarthWidthInParsecRes {
+  float message = 1;
+}
+
+
+message Empty {}
