@@ -3,12 +3,15 @@ syntax = "proto3";
 package parsec;
 
 service Parsec {
-  rpc HowManyEarthWidthInParsec(Empty) returns (HowManyEarthWidthInParsecRes);
+  rpc HowManyWidthInParsec(HowManyWidthInParsecRequest) returns (Response);
+  rpc ParsecInKilometers(Empty) returns (Response);
 }
 
-message HowManyEarthWidthInParsecRes {
+message HowManyWidthInParsecRequest {
   float message = 1;
 }
-
+message Response {
+  float message = 1;
+}
 
 message Empty {}

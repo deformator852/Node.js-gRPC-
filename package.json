@@ -7,7 +7,6 @@
     "server": "nodemon server.cjs",
     "client": "node client.cjs"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "description": "",

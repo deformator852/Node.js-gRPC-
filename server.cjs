@@ -1,7 +1,5 @@
 const grpc = require('@grpc/grpc-js')
-const protoLoader = require('@grpc/proto-loader')
-const PARSEC = 3.086e13
-const EARTH_WIDTH = 12756
+const { parsecService } = require('./parsecService.cjs')
 
 class Server {
   constructor(port) {
@@ -29,30 +27,7 @@ class Server {
     )
   }
 }
-function parsecService() {
-  const PROTO_FILE = __dirname + '/parsec.proto'
-  const config = {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true,
-  }
-  const packageDefinition = protoLoader.loadSync(PROTO_FILE, config)
-  const proto = grpc.loadPackageDefinition(packageDefinition).parsec
-
-  return {
-    proto: proto,
-    procedures: {
-      HowManyEarthWidthInParsec: (call, callback) => {
-        const message = PARSEC / EARTH_WIDTH
-        callback(null, { message })
-      },
-    },
-  }
-}
 
 const server = new Server(50051)
-const service = parsecService()
-server.addService(service, 'Parsec')
+server.addService(parsecService, 'Parsec')
 server.run()
